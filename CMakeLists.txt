@@ -12,8 +12,6 @@ endif ()
 
 message(STATUS "Setting up node addon environment...")
 
-add_compile_definitions(BUILDING_NODE_EXTENSION)
-
 find_program(npm NAMES npm.cmd npm REQUIRED)
 message(STATUS "Found npm: ${npm}")
 
@@ -134,6 +132,12 @@ message(STATUS "NODE_ADDON_INC: ${NODE_ADDON_INC}")
 add_library(
         node-addon-lib
         INTERFACE
+)
+
+target_compile_definitions(
+        node-addon-lib
+        INTERFACE
+        BUILDING_NODE_EXTENSION
 )
 
 target_link_libraries(
